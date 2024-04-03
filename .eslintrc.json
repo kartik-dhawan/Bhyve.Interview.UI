@@ -1,3 +1,45 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    // throws error when we use single quotes
+    "quotes": ["error", "double"],
+    "@typescript-eslint/quotes": "warn",
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    // allow jsx syntax in js files (for next.js project)
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "no-undef-init": "error",
+    "no-unused-vars": "error",
+    "semi": "off",
+    "camelcase": "off",
+    "no-unused-expressions": "error",
+    "no-multiple-empty-lines": ["error", { "max": 2 }],
+    "no-duplicate-imports": "error",
+    "no-console": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
 }
