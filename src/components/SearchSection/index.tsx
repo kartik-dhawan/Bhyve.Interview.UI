@@ -16,10 +16,12 @@ import { setSearchResults } from "@/redux/slices/articlesSlice"
 
 interface SearchSectionProps {
   searchedArticles: Articles[]
+  setSearchText: any
 }
 
 export default function SearchSection({
   searchedArticles,
+  setSearchText,
 }: SearchSectionProps) {
   const dispatch = useDispatch()
 
@@ -53,6 +55,7 @@ export default function SearchSection({
         _hover={{ backgroundColor: "#333" }}
         onClick={() => {
           dispatch(setSearchResults([]))
+          setSearchText("")
         }}
       >
         Clear

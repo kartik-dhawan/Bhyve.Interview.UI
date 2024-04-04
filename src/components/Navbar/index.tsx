@@ -70,6 +70,7 @@ export default function Navbar() {
             e.preventDefault()
             setSearchText(e.target.value)
           }}
+          value={searchText}
         />
 
         {/* search section which appears if it matches any record in db */}
@@ -78,7 +79,10 @@ export default function Navbar() {
           in={searchedArticles.length !== 0}
           style={{ position: "absolute", left: 0, top: "100%", width: "100%" }}
         >
-          <SearchSection searchedArticles={searchedArticles} />
+          <SearchSection
+            searchedArticles={searchedArticles}
+            setSearchText={setSearchText}
+          />
         </ScaleFade>
       </InputGroup>
 

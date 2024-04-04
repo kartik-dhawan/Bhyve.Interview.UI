@@ -9,10 +9,10 @@ interface ArticleCardProps {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <GridItem zIndex={-1}>
+    <GridItem>
       <Flex gap={4}>
-        <Avatar name={article.name} src={article.avatar} />
-        <Stack flexGrow={1}>
+        <Avatar name={article.name} src={article.avatar} zIndex={-1} />
+        <Stack flexGrow={1} zIndex={-1}>
           <Text fontWeight={600} fontSize="lg">
             {article.name}
           </Text>
@@ -28,6 +28,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
             sx={{ padding: "8px 16px !important" }}
             width="max-content"
             size="sm"
+            zIndex={-1}
           >
             View
           </Button>
