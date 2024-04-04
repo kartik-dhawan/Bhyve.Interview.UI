@@ -15,16 +15,17 @@ import { useRef } from "react"
  *
  * Ref: https://www.youtube.com/watch?v=dRLjoT4r-jc
  */
-//
-//
 
-// import store from "./store"
+import store from "./store"
+import { saveArticlesData } from "./slices/articlesSlice"
 
 const Preloader = ({ data }: any) /* eslint-disable-line */ => {
   const loaded = useRef(false)
+
   if (!loaded.current) {
     // dispatch data from the server to all the slices as required
-    // if (data.content) store.dispatch()
+    if (data.articles) store.dispatch(saveArticlesData(data.articles))
+    loaded.current = true
   }
 
   return null

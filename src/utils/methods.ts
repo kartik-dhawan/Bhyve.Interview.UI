@@ -75,3 +75,16 @@ export const updateAnArticle = async (articleId: number, payload: any) => {
   const data = makeRequest("PUT", `${API_PATHS.ARTICLES}/${articleId}`, payload)
   return data
 }
+
+/**
+ *
+ * @param {Object} obj
+ * @returns {string}
+ */
+export const objectToQueryString = (obj: any): string => {
+  const keys = Object.keys(obj)
+  const keyValuePairs = keys.map((key) => {
+    return encodeURIComponent(key) + "=" + encodeURIComponent(obj[key])
+  })
+  return keyValuePairs.join("&")
+}
