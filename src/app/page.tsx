@@ -1,6 +1,6 @@
 import { getArticles } from "@/actions/getArticles"
 import ArticlesSection from "@/components/ArticlesSection"
-import CreateEditProduct from "@/components/CreateEditProduct"
+import CreateProduct from "@/components/CreateProduct"
 import CustomHeading from "@/components/CustomHeading"
 import ReduxProvider from "@/redux/ReduxProvider"
 import Preloader from "@/redux/preloader"
@@ -26,7 +26,7 @@ export default async function Home() {
         extraText="Don't miss the <b>latest</b> happenings on <b>this website.</b>"
       />
       <ReduxProvider>
-        <CreateEditProduct />
+        <CreateProduct />
         <ArticlesSection />
       </ReduxProvider>
     </main>

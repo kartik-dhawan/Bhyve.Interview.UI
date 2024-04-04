@@ -8,16 +8,22 @@ import {
   Flex,
   Wrap,
   WrapItem,
+  useDisclosure,
 } from "@chakra-ui/react"
 import React, { useCallback, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
-import { deleteAnArticle } from "@/utils/methods"
+import { deleteAnArticle, updateAnArticle } from "@/utils/methods"
 import { styles } from "./styles"
 import { useRouter } from "next/navigation"
+import CustomFormDrawer from "../CreateProduct/CustomFormDrawer"
+import { INITIAL_FORM_STATE } from "@/utils/constants"
+import { Articles } from "@/utils/interfaces"
+import { saveCurrentArticle } from "@/redux/slices/articlesSlice"
 
 export default function ArticleDetails() {
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const { currentArticle } = useSelector(
     (state: RootType) => state.articlesSlice,
@@ -25,6 +31,14 @@ export default function ArticleDetails() {
 
   const [loader, setLoader] = useState(false)
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isFormLoader, setIsFormLoader] = useState(false)
+
+  const [formData, setFormData] = useState<Articles>(
+    currentArticle ?? INITIAL_FORM_STATE,
+  )
+
+  // deletes an article
   const deleteArticleHandler = useCallback(() => {
     setLoader(true)
     if (currentArticle) {
@@ -33,6 +47,16 @@ export default function ArticleDetails() {
       })
     }
   }, [])
+
+  // updates the article in DB using the API
+  const editProductHandler = useCallback(() => {
+    setIsFormLoader(true)
+    updateAnArticle(formData.id, formData).then(() => {
+      setIsFormLoader(false)
+      dispatch(saveCurrentArticle(formData))
+      onClose()
+    })
+  }, [formData])
 
   return (
     <Flex
@@ -50,7 +74,12 @@ export default function ArticleDetails() {
       {/* action items */}
       <Wrap sx={{ "& ul": { justifyContent: "flex-end" } }}>
         <WrapItem>
-          <Button variant="solid" size="lg" sx={styles.editDeleteIconButtons}>
+          <Button
+            variant="solid"
+            size="lg"
+            sx={styles.editDeleteIconButtons}
+            onClick={onOpen}
+          >
             <EditIcon />
           </Button>
         </WrapItem>
@@ -72,6 +101,17 @@ export default function ArticleDetails() {
           <Avatar name={currentArticle?.name} src={currentArticle?.avatar} />
         </WrapItem>
       </Wrap>
+
+      {/* edit drawer */}
+      <CustomFormDrawer
+        isLoader={isFormLoader}
+        isOpen={isOpen}
+        onClose={onClose}
+        submitHandler={editProductHandler}
+        formData={formData}
+        setFormData={setFormData}
+        isEditForm
+      />
     </Flex>
   )
 }
