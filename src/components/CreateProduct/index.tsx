@@ -24,15 +24,8 @@ export default function CreateProduct() {
       ...formData,
       createdAt: new Date().toLocaleDateString(),
     })
-      .then(() => {
-        dispatch(
-          saveArticlesData([
-            {
-              ...formData,
-              createdAt: new Date().toLocaleDateString(),
-            },
-          ]),
-        )
+      .then((res) => {
+        dispatch(saveArticlesData([res]))
         setIsLoader(false)
         onClose()
       })
