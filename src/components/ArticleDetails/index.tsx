@@ -3,9 +3,9 @@
 import { RootType } from "@/redux/store"
 import {
   Avatar,
-  Box,
   Button,
   CircularProgress,
+  Flex,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
@@ -35,8 +35,20 @@ export default function ArticleDetails() {
   }, [])
 
   return (
-    <Box mx={8}>
-      <Wrap className="hello" sx={{ "& ul": { justifyContent: "flex-end" } }}>
+    <Flex
+      mx={8}
+      justifyContent="space-between"
+      sx={styles.articleDetailsSection}
+    >
+      {/* details */}
+      <Wrap color="#777" fontWeight={500}>
+        <WrapItem textDecoration="underline">#{currentArticle?.id}</WrapItem>
+        <WrapItem>{"//"}</WrapItem>
+        <WrapItem>${currentArticle?.productPrice}</WrapItem>
+      </Wrap>
+
+      {/* action items */}
+      <Wrap sx={{ "& ul": { justifyContent: "flex-end" } }}>
         <WrapItem>
           <Button variant="solid" size="lg" sx={styles.editDeleteIconButtons}>
             <EditIcon />
@@ -60,6 +72,6 @@ export default function ArticleDetails() {
           <Avatar name={currentArticle?.name} src={currentArticle?.avatar} />
         </WrapItem>
       </Wrap>
-    </Box>
+    </Flex>
   )
 }

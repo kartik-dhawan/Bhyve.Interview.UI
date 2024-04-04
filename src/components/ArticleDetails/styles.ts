@@ -8,4 +8,14 @@ export const styles = {
       backgroundColor: "#353535",
     },
   },
+  articleDetailsSection: {
+    flexDirection: {
+      base: "column",
+      md: "row",
+    },
+    alignItems: {
+      base: "center",
+    },
+    gap: "1rem",
+  },
 }
