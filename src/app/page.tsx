@@ -12,6 +12,7 @@ export default async function Home() {
 
   // only fetch data if the redux store is empty
   if (store.getState().articlesSlice.articles.length === 0) {
+    console.log("ehhhh")
     articles = await getArticles({ page: 1, limit: 10 })
     store.dispatch(saveArticlesData(articles))
   }
