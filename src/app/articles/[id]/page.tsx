@@ -6,6 +6,8 @@ import { saveCurrentArticle } from "@/redux/slices/articlesSlice"
 import store from "@/redux/store"
 import { Articles } from "@/utils/interfaces"
 import { getArticleById } from "@/utils/methods"
+import { Button } from "@chakra-ui/react"
+import Link from "next/link"
 import React from "react"
 
 export default async function ArticlePage({ params }: any) {
@@ -14,6 +16,18 @@ export default async function ArticlePage({ params }: any) {
 
   return (
     <main>
+      <Link href="/">
+        <Button
+          variant="outlined"
+          backgroundColor="#222"
+          color="#e9e9e9"
+          borderRadius="1000px"
+          m="2rem 2rem -1rem"
+        >
+          Go Back
+        </Button>
+      </Link>
+
       <CustomHeading
         title={currentArticle.productName}
         subtitle={currentArticle.name}

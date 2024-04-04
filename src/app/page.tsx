@@ -1,5 +1,6 @@
 import { getArticles } from "@/actions/getArticles"
 import ArticlesSection from "@/components/ArticlesSection"
+import CreateEditProduct from "@/components/CreateEditProduct"
 import CustomHeading from "@/components/CustomHeading"
 import ReduxProvider from "@/redux/ReduxProvider"
 import Preloader from "@/redux/preloader"
@@ -18,12 +19,14 @@ export default async function Home() {
   return (
     <main>
       <Preloader data={{ articles }} />
+
       <CustomHeading
         title="Follow what is in your mind in this very moment."
         subtitle="Blogs and articles."
         extraText="Don't miss the <b>latest</b> happenings on <b>this website.</b>"
       />
       <ReduxProvider>
+        <CreateEditProduct />
         <ArticlesSection />
       </ReduxProvider>
     </main>
