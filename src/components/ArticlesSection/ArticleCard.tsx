@@ -18,7 +18,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
           </Text>
           <Text noOfLines={2}>{article.description}</Text>
         </Stack>
-        <Link href={`/${article.id}`} target="_blank">
+        <Link href={`/articles/${article.id}`} target="_blank">
           <Button
             variant="solid"
             fontWeight={400}

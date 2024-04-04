@@ -17,7 +17,7 @@ import { useRef } from "react"
  */
 
 import store from "./store"
-import { saveArticlesData } from "./slices/articlesSlice"
+import { saveArticlesData, saveCurrentArticle } from "./slices/articlesSlice"
 
 const Preloader = ({ data }: any) /* eslint-disable-line */ => {
   const loaded = useRef(false)
@@ -25,6 +25,8 @@ const Preloader = ({ data }: any) /* eslint-disable-line */ => {
   if (!loaded.current) {
     // dispatch data from the server to all the slices as required
     if (data.articles) store.dispatch(saveArticlesData(data.articles))
+    if (data.currentArticle)
+      store.dispatch(saveCurrentArticle(data.currentArticle))
     loaded.current = true
   }
 

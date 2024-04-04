@@ -3,10 +3,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 interface ArticlesSliceState {
   articles: Articles[]
+  currentArticle: Articles | null
 }
 
 const initialState: ArticlesSliceState = {
   articles: [],
+  currentArticle: null,
 }
 
 const articlesSlice = createSlice({
@@ -19,8 +21,15 @@ const articlesSlice = createSlice({
     ) => {
       state.articles = state.articles.concat(action.payload)
     },
+
+    saveCurrentArticle: (
+      state: ArticlesSliceState,
+      action: PayloadAction<Articles>,
+    ) => {
+      state.currentArticle = action.payload
+    },
   },
 })
 
-export const { saveArticlesData } = articlesSlice.actions
+export const { saveArticlesData, saveCurrentArticle } = articlesSlice.actions
 export default articlesSlice.reducer
