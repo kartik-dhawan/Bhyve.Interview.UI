@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body
         className={inter.className}
-        style={{ backgroundColor: "#e9e9e9", padding: "1rem 2rem" }}
+        style={{ backgroundColor: "#e9e9e9", padding: "1rem" }}
       >
         <ChakraProvider>
           <Navbar />

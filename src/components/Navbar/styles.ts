@@ -2,6 +2,7 @@ export const styles = {
   primaryButtons: {
     letterSpacing: "1px",
     borderRadius: "8px",
+    width: "max-content",
     fontSize: {
       base: "16px",
       md: "14px",

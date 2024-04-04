@@ -44,7 +44,6 @@ export default function Navbar() {
           colorScheme="#e9e9e9"
           variant="solid"
           fontWeight={400}
-          px={{ base: 8, md: 6 }}
           _hover={{ backgroundColor: "#333" }}
           sx={styles.primaryButtons}
         >
@@ -58,8 +57,8 @@ export default function Navbar() {
           colorScheme="#222"
           fontWeight={400}
           py={2}
-          px={{ base: 8, md: 6 }}
           _hover={{ backgroundColor: "#2222221b" }}
+          display={{ base: "none", sm: "flex" }}
           sx={styles.primaryButtons}
         >
           Portfolio
