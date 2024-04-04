@@ -1,5 +1,7 @@
 import { getArticles } from "@/actions/getArticles"
+import ArticlesSection from "@/components/ArticlesSection"
 import CustomHeading from "@/components/CustomHeading"
+import ReduxProvider from "@/redux/ReduxProvider"
 import Preloader from "@/redux/preloader"
 import { saveArticlesData } from "@/redux/slices/articlesSlice"
 import store from "@/redux/store"
@@ -16,6 +18,9 @@ export default async function Home() {
         subtitle="Blogs and articles."
         extraText="Don't miss the <b>latest</b> happenings on <b>awwwards.</b>"
       />
+      <ReduxProvider>
+        <ArticlesSection />
+      </ReduxProvider>
     </main>
   )
 }

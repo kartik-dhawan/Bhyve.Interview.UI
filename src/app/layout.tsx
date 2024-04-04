@@ -20,6 +20,7 @@ export default function RootLayout({
       <body
         className={inter.className}
         style={{ backgroundColor: "#e9e9e9", padding: "1rem" }}
+        suppressHydrationWarning={true}
       >
         <ChakraProvider>
           <Navbar />
