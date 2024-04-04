@@ -19,7 +19,9 @@ export default async function Home() {
 
   return (
     <main>
-      <Preloader data={{ articles }} />
+      {store.getState().articlesSlice.articles.length === 0 && (
+        <Preloader data={{ articles }} />
+      )}
 
       <CustomHeading
         title="Follow what is in your mind in this very moment."
