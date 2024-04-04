@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar"
+import ReduxProvider from "@/redux/ReduxProvider"
 import { ChakraProvider } from "@chakra-ui/react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
@@ -23,7 +24,9 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <ChakraProvider>
-          <Navbar />
+          <ReduxProvider>
+            <Navbar />
+          </ReduxProvider>
           {children}
         </ChakraProvider>
       </body>

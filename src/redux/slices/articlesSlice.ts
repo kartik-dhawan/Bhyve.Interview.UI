@@ -4,11 +4,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 interface ArticlesSliceState {
   articles: Articles[]
   currentArticle: Articles | null
+  searchedArticles: Articles[]
 }
 
 const initialState: ArticlesSliceState = {
   articles: [],
   currentArticle: null,
+  searchedArticles: [],
 }
 
 const articlesSlice = createSlice({
@@ -28,8 +30,16 @@ const articlesSlice = createSlice({
     ) => {
       state.currentArticle = action.payload
     },
+
+    setSearchResults: (
+      state: ArticlesSliceState,
+      action: PayloadAction<Articles[]>,
+    ) => {
+      state.searchedArticles = action.payload
+    },
   },
 })
 
-export const { saveArticlesData, saveCurrentArticle } = articlesSlice.actions
+export const { saveArticlesData, saveCurrentArticle, setSearchResults } =
+  articlesSlice.actions
 export default articlesSlice.reducer

@@ -19,9 +19,9 @@ export default async function Home() {
     <main>
       <Preloader data={{ articles }} />
       <CustomHeading
-        title="Follow what's brand new in digital design."
+        title="Follow what is in your mind in this very moment."
         subtitle="Blogs and articles."
-        extraText="Don't miss the <b>latest</b> happenings on <b>awwwards.</b>"
+        extraText="Don't miss the <b>latest</b> happenings on <b>this website.</b>"
       />
       <ReduxProvider>
         <ArticlesSection />

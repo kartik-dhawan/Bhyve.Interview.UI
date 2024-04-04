@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
   Flex,
   Input,
@@ -8,13 +8,46 @@ import {
   Button,
   InputGroup,
   InputLeftElement,
+  ScaleFade,
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons"
 import { styles } from "./styles"
 import Link from "next/link"
 import { GITHUB_URL, PORTFOLIO_URL } from "@/utils/constants"
+import { useDispatch, useSelector } from "react-redux"
+import { Articles } from "@/utils/interfaces"
+import { getAllArticles } from "@/utils/methods"
+import { setSearchResults } from "@/redux/slices/articlesSlice"
+import { RootType } from "@/redux/store"
+import SearchSection from "../SearchSection"
 
 export default function Navbar() {
+  const dispatch = useDispatch()
+
+  const [searchText, setSearchText] = useState<string>("")
+
+  // sets search results in redux state
+  useEffect(() => {
+    if (searchText && searchText !== "") {
+      getAllArticles().then((res) => {
+        const searchResults: Articles[] = [...res].filter((item: Articles) => {
+          return item.name
+            .toLocaleLowerCase()
+            .includes(searchText.toLocaleLowerCase())
+        })
+        console.log(searchResults)
+
+        dispatch(setSearchResults(searchResults))
+      })
+    } else {
+      dispatch(setSearchResults([]))
+    }
+  }, [searchText])
+
+  const { searchedArticles } = useSelector(
+    (state: RootType) => state.articlesSlice,
+  )
+
   return (
     <Flex gap={4}>
       <Text fontSize="3xl" fontWeight={600} color="#222">
@@ -22,7 +55,7 @@ export default function Navbar() {
       </Text>
 
       {/* navbar search input */}
-      <InputGroup>
+      <InputGroup position="relative">
         <InputLeftElement>
           <SearchIcon sx={styles.navbarSearchIcon} />
         </InputLeftElement>
@@ -33,7 +66,20 @@ export default function Navbar() {
           sx={{ backgroundColor: "#d2d2d2", color: "#888" }}
           focusBorderColor="#e9e9e9"
           textColor="#d2d2d2"
+          onChange={(e) => {
+            e.preventDefault()
+            setSearchText(e.target.value)
+          }}
         />
+
+        {/* search section which appears if it matches any record in db */}
+        <ScaleFade
+          initialScale={0.9}
+          in={searchedArticles.length !== 0}
+          style={{ position: "absolute", left: 0, top: "100%", width: "100%" }}
+        >
+          <SearchSection searchedArticles={searchedArticles} />
+        </ScaleFade>
       </InputGroup>
 
       {/* navbar action buttons */}

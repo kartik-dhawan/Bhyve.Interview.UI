@@ -9,7 +9,7 @@ interface ArticleCardProps {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <GridItem>
+    <GridItem zIndex={-1}>
       <Flex gap={4}>
         <Avatar name={article.name} src={article.avatar} />
         <Stack flexGrow={1}>
