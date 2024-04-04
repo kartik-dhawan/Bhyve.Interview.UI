@@ -11,6 +11,7 @@ import Link from "next/link"
 import React from "react"
 
 export default async function ArticlePage({ params }: any) {
+  // SERVER SIDE REDUX
   const currentArticle: Articles = await getArticleById(params.id)
   store.dispatch(saveCurrentArticle(currentArticle ?? null))
 

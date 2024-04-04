@@ -10,9 +10,8 @@ import store from "@/redux/store"
 export default async function Home() {
   let articles = []
 
-  // only fetch data if the redux store is empty
+  // only fetch data if the redux store is empty - SERVER SIDE REDUX
   if (store.getState().articlesSlice.articles.length === 0) {
-    console.log("ehhhh")
     articles = await getArticles({ page: 1, limit: 10 })
     store.dispatch(saveArticlesData(articles))
   }
@@ -20,6 +19,7 @@ export default async function Home() {
   return (
     <main>
       {store.getState().articlesSlice.articles.length === 0 && (
+        // preloads data from SERVER SIDE REDUX to CLIENT SIDE REDUX
         <Preloader data={{ articles }} />
       )}
 
@@ -28,6 +28,8 @@ export default async function Home() {
         subtitle="Blogs and articles."
         extraText="Don't miss the <b>latest</b> happenings on <b>this website.</b>"
       />
+
+      {/* wrapping client components which uses redux states/store with a provider separately */}
       <ReduxProvider>
         <CreateProduct />
         <ArticlesSection />
