@@ -1,4 +1,6 @@
+import ArticleDetails from "@/components/ArticleDetails"
 import CustomHeading from "@/components/CustomHeading"
+import ReduxProvider from "@/redux/ReduxProvider"
 import Preloader from "@/redux/preloader"
 import { saveCurrentArticle } from "@/redux/slices/articlesSlice"
 import store from "@/redux/store"
@@ -18,6 +20,11 @@ export default async function ArticlePage({ params }: any) {
         extraText={currentArticle.description}
       />
       <Preloader data={{ currentArticle }} />
+
+      {/* wrapping client components which uses redux states/store with a provider separately */}
+      <ReduxProvider>
+        <ArticleDetails />
+      </ReduxProvider>
     </main>
   )
 }

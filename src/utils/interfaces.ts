@@ -18,5 +18,5 @@ export type Articles = {
   description: string
   name: string
   productPrice: string
-  id: string
+  id: number
 }
